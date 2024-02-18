@@ -5,18 +5,18 @@
         <title>Etch-a-Sketch</title>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body onload="main();">
         <div class="boardContainer">
             <div class="boardControls">
-                <button id="resetButton">Reset</button>
-                <button id="resizeButton">Resize</button>
-                <button id="selectColor">Select Color</button>
+                <div class="colorSelected">
+                
+                </div>
+                <button id="resetButton" onclick = "resetBoard();">Reset</button>
+                <button id="resizeButton" onclick = "resizeButton();">Resize</button>
+                <button id="selectColor" onclick = "changeColorButton()">Select Color</button>
                 <button id="randomColor">Random Color</button>
             </div>
             <div class="board">
-                
-            </div>
-            <div class="colorSelected">
                 
             </div>
         </div>
