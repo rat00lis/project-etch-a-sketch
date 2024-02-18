@@ -1,18 +1,19 @@
-function addPaintListeners(){
+let color = 'black';
+
+function addPaintListeners(color){
     blocks = document.querySelectorAll(".block");
 
     blocks.forEach(block => {
         
         block.addEventListener('mouseover',() => {
-            paintBlock(block, 'black');
+            paintBlock(block, color);
         });
     });
 }
+
 function resizeBoard(board, ammountBlocks) {
+    ammountBlocks = ((ammountBlocks > 0) && (ammountBlocks <= 100)) ? ammountBlocks : 10;
     board.innerHTML = '';
-    // then you get the size of the board and divide it into the blocks
-    boardWidth = board.clientWidth;
-    blockWidth = Math.floor(boardWidth / ammountBlocks);
 
     for (index = 0; index < ammountBlocks; index ++){
         const blocksJoined = new DocumentFragment();
@@ -21,14 +22,12 @@ function resizeBoard(board, ammountBlocks) {
         for (index_2 = 0; index_2 < ammountBlocks; index_2 ++){
             let blockUnit = document.createElement("div");
             blockUnit.classList = "block";
-            blockUnit.style.width = blockWidth + `px`;
-            blockUnit.style.height = blockWidth + 'px';
             row.appendChild(blockUnit);
         }
         blocksJoined.appendChild(row);
         board.appendChild(blocksJoined);
     }
-    addPaintListeners();
+    addPaintListeners(color);
 }
 
 function paintBlock(block, color){
@@ -46,5 +45,5 @@ resizeButton.addEventListener("click", () => {
     resizeBoard(board,ammountBlocks);
 });
 
-addPaintListeners();
+addPaintListeners(color);
 
