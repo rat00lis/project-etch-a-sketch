@@ -1,12 +1,12 @@
-let color = 'black';
-let board = document.querySelector(".board");
-let ammountBlocks = 10;
+let SELECTED_COLOR = 'black';
+let BOARD = document.querySelector(".board");
+let AMMOUNT_BLOCKS = 10;
 
 function randomColor(){
 
 }
-function addPaintListeners(color){
-    if (color == 'rainbow'){
+function addPaintListeners(){
+    if (SELECTED_COLOR == 'rainbow'){
         selectedColorDiv = document.querySelector('.colorSelected');
         selectedColorDiv.textContent = ':3';
     }else{
@@ -18,8 +18,8 @@ function addPaintListeners(color){
     blocks.forEach(block => {
         
         block.addEventListener('mouseover',() => {
-            if(color!='rainbow'){
-                paintBlock(block, color);
+            if(SELECTED_COLOR!='rainbow'){
+                paintBlock(block, SELECTED_COLOR);
             }
             else{
                 paintBlock(block, randomColor());
@@ -28,53 +28,59 @@ function addPaintListeners(color){
     });
     
 }
-function readjustColor(color){
+function readjustColor(){
     colorSelected = document.querySelector(".colorSelected");
-    colorSelected.style.backgroundColor = color;
+    colorSelected.style.backgroundColor = SELECTED_COLOR;
 }
-function resizeBoard(board, ammountBlocks) {
-    ammountBlocks = ((ammountBlocks > 0) && (ammountBlocks <= 100)) ? ammountBlocks : 10;
-    board.innerHTML = '';
+function resizeBoard(BOARD, AMMOUNT_BLOCKS) {
+    AMMOUNT_BLOCKS = ((AMMOUNT_BLOCKS > 0) && (AMMOUNT_BLOCKS <= 100)) ? AMMOUNT_BLOCKS : 10;
+    BOARD.innerHTML = '';
 
-    for (index = 0; index < ammountBlocks; index ++){
+    for (index = 0; index < AMMOUNT_BLOCKS; index ++){
         const blocksJoined = new DocumentFragment();
         let row = document.createElement("div");
         row.classList = "row";
-        for (index_2 = 0; index_2 < ammountBlocks; index_2 ++){
+        for (index_2 = 0; index_2 < AMMOUNT_BLOCKS; index_2 ++){
             let blockUnit = document.createElement("div");
             blockUnit.classList = "block";
             row.appendChild(blockUnit);
         }
         blocksJoined.appendChild(row);
-        board.appendChild(blocksJoined);
+        BOARD.appendChild(blocksJoined);
     }
-    addPaintListeners(color);
+    addPaintListeners(SELECTED_COLOR);
 }
 
 function paintBlock(block, color){
-    colorOpacity = block.style.opacity? block.style.opacity : 0;
+    let colorOpacity = block.style.opacity? block.style.opacity : 0;
+    let currentColor = block.getAttribute('data-color', color);
+    //reset opacity if color changed
+    if (color != currentColor){
+        colorOpacity = 0;
+        block.setAttribute('data-color', color);
+    }
     block.style.backgroundColor = color;
     block.style.opacity = (parseFloat(colorOpacity) + 0.1).toString();
-
 }
 
 function resetBoard(){
-    resizeBoard(board, ammountBlocks)
+    resizeBoard(BOARD, AMMOUNT_BLOCKS)
 }
 
 function changeColor(newColor = prompt('Select Color')){
-    color = newColor;
+    SELECTED_COLOR = newColor;
     readjustColor(newColor);
-    addPaintListeners(color);
+    addPaintListeners(SELECTED_COLOR);
 }
 function randomColor(){
     return '#' + Math.floor(Math.random()*16777215).toString(16);
 }
 
+
 function main(){
-    resizeBoard(board, ammountBlocks);
-    readjustColor(color);
-    addPaintListeners(color);
+    resizeBoard(BOARD, AMMOUNT_BLOCKS);
+    readjustColor(SELECTED_COLOR);
+    addPaintListeners(SELECTED_COLOR);
 }
 
 
