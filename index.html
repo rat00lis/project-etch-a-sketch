@@ -10,9 +10,10 @@
             <div class="boardControls">
                 <div class="colorSelected" ></div>
                 <button id="resetButton" onclick = "resetBoard();">Reset</button>
-                <button id="resizeButton" onclick = "resize();">Resize</button>
+                <button id="resizeButton" onclick = "resizeBoard(board, ammountBlocks = prompt('select size (max 100)'));">Resize</button>
                 <button id="selectColor" title="rainbow is my favorite" onclick = "changeColor();">Select Color</button>
                 <button id="randomColor" onclick = "changeColor(randomColor());">Random Color</button>
+                <button id="eraser" onclick = "changeColor('rgba(255,255,255,0)');">Eraser</button>
             </div>
             <div class="board">
                 
