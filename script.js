@@ -52,13 +52,10 @@ function resizeBoard(board, ammountBlocks) {
 }
 
 function paintBlock(block, color){
+    colorOpacity = block.style.opacity? block.style.opacity : 0;
     block.style.backgroundColor = color;
-}
+    block.style.opacity = (parseFloat(colorOpacity) + 0.1).toString();
 
-function resize(){
-    ammountBlocks = prompt("select size (max 100)");
-        // first we clear the div
-        resizeBoard(board,ammountBlocks);
 }
 
 function resetBoard(){
