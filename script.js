@@ -2,17 +2,8 @@ let SELECTED_COLOR = 'black';
 let BOARD = document.querySelector(".board");
 let AMMOUNT_BLOCKS = 10;
 
-function randomColor(){
-
-}
 function addPaintListeners(){
-    if (SELECTED_COLOR == 'rainbow'){
-        selectedColorDiv = document.querySelector('.colorSelected');
-        selectedColorDiv.textContent = ':3';
-    }else{
-        selectedColorDiv = document.querySelector('.colorSelected');
-        selectedColorDiv.textContent = '';
-    }
+
     blocks = document.querySelectorAll(".block");
 
     blocks.forEach(block => {
@@ -48,46 +39,49 @@ function resizeBoard(BOARD, AMMOUNT_BLOCKS) {
         blocksJoined.appendChild(row);
         BOARD.appendChild(blocksJoined);
     }
-    addPaintListeners(SELECTED_COLOR);
+    addPaintListeners();
 }
 
 function paintBlock(block, color){
-    let colorOpacity = block.style.opacity? block.style.opacity : 0;
-    let currentColor = block.getAttribute('data-color', color);
-    //reset opacity if color changed
-    if (color != currentColor){
-        colorOpacity = 0;
-        block.setAttribute('data-color', color);
+    let colorOpacity = parseFloat(block.style.opacity) || 0;
+    if(color == 'eraser'){
+        colorOpacity = colorOpacity > 0 ? colorOpacity - 0.1 : 0;
+        block.style.opacity = colorOpacity;
     }
-    block.style.backgroundColor = color;
-    block.style.opacity = (parseFloat(colorOpacity) + 0.1).toString();
+    else{
+        if (colorOpacity < 1) {
+            colorOpacity += 0.1;
+        }
+    
+        block.style.opacity = colorOpacity;
+        block.style.backgroundColor = color;
+    }
 }
 
 function resetBoard(){
-    resizeBoard(BOARD, AMMOUNT_BLOCKS)
+    resizeBoard(BOARD, AMMOUNT_BLOCKS);
 }
 
 function changeColor(newColor = prompt('Select Color')){
+    if (newColor == 'rainbow'){
+        console.log('rainbow');
+        selectedColorDiv = document.querySelector('.colorSelected');
+        selectedColorDiv.textContent = ':3';
+    }else{
+        selectedColorDiv = document.querySelector('.colorSelected');
+        selectedColorDiv.textContent = '';
+    }
     SELECTED_COLOR = newColor;
     readjustColor(newColor);
-    addPaintListeners(SELECTED_COLOR);
 }
 function randomColor(){
     return '#' + Math.floor(Math.random()*16777215).toString(16);
 }
 function toggleGrid(){
     let enableButton = document.querySelector('#toggleGrid');
-    if(enableButton.classList.contains('gridEnabled')){
-        let blocks = document.querySelectorAll('.block');
-        blocks.forEach(block => {
-            block.style.border = 'none';
-        });
-    }else{
-        let blocks = document.querySelectorAll('.block');
-        blocks.forEach(block => {
-            block.style.border = '1px solid black';
-        });
-    }
+    blocks.forEach(block => {
+        block.classList.toggle('border');
+    });
     enableButton.classList.toggle('gridEnabled');
     enableButton.textContent = enableButton.textContent == 'Enable Grid' ? 'Disable Grid' : 'Enable Grid';
 }
@@ -96,7 +90,7 @@ function toggleGrid(){
 function main(){
     resizeBoard(BOARD, AMMOUNT_BLOCKS);
     readjustColor(SELECTED_COLOR);
-    addPaintListeners(SELECTED_COLOR);
+    addPaintListeners();
+    toggleGrid();
 }
-
 
