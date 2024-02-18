@@ -1,15 +1,32 @@
 let color = 'black';
 let board = document.querySelector(".board");
 let ammountBlocks = 10;
+
+function randomColor(){
+
+}
 function addPaintListeners(color){
+    if (color == 'rainbow'){
+        selectedColorDiv = document.querySelector('.colorSelected');
+        selectedColorDiv.textContent = ':3';
+    }else{
+        selectedColorDiv = document.querySelector('.colorSelected');
+        selectedColorDiv.textContent = '';
+    }
     blocks = document.querySelectorAll(".block");
 
     blocks.forEach(block => {
         
         block.addEventListener('mouseover',() => {
-            paintBlock(block, color);
+            if(color!='rainbow'){
+                paintBlock(block, color);
+            }
+            else{
+                paintBlock(block, randomColor());
+            }
         });
     });
+    
 }
 function readjustColor(color){
     colorSelected = document.querySelector(".colorSelected");
@@ -52,6 +69,9 @@ function changeColor(newColor = prompt('Select Color')){
     color = newColor;
     readjustColor(newColor);
     addPaintListeners(color);
+}
+function randomColor(){
+    return '#' + Math.floor(Math.random()*16777215).toString(16);
 }
 
 function main(){
