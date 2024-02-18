@@ -41,9 +41,9 @@ body{
                 display: flex;
                 flex: 1;
                 width: inherit;
+                background-color: #EDF2EF;
             }
                 .block{
-                    background-color: #EDF2EF;
                     border: 1px solid #212738;
                     flex: 1;
                 }
