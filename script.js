@@ -1,3 +1,13 @@
+function addPaintListeners(){
+    blocks = document.querySelectorAll(".block");
+
+    blocks.forEach(block => {
+        
+        block.addEventListener('mouseover',() => {
+            paintBlock(block, 'black');
+        });
+    });
+}
 function resizeBoard(board, ammountBlocks) {
     board.innerHTML = '';
     // then you get the size of the board and divide it into the blocks
@@ -13,12 +23,16 @@ function resizeBoard(board, ammountBlocks) {
             blockUnit.classList = "block";
             blockUnit.style.width = blockWidth + `px`;
             blockUnit.style.height = blockWidth + 'px';
-            console.log(blockWidth);
             row.appendChild(blockUnit);
         }
         blocksJoined.appendChild(row);
         board.appendChild(blocksJoined);
     }
+    addPaintListeners();
+}
+
+function paintBlock(block, color){
+    block.style.backgroundColor = color;
 }
 
 board = document.querySelector(".board");
@@ -31,3 +45,6 @@ resizeButton.addEventListener("click", () => {
     // first we clear the div
     resizeBoard(board,ammountBlocks);
 });
+
+addPaintListeners();
+
