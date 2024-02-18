@@ -8,18 +8,23 @@
     <body onload="main();">
         <div class="boardContainer">
             <div class="boardControls">
-                <div class="colorSelected">
-                
-                </div>
+                <div class="colorSelected" ></div>
                 <button id="resetButton" onclick = "resetBoard();">Reset</button>
                 <button id="resizeButton" onclick = "resize();">Resize</button>
-                <button id="selectColor" onclick = "changeColor()">Select Color</button>
-                <button id="randomColor">Random Color</button>
+                <button id="selectColor" title="rainbow is my favorite" onclick = "changeColor();">Select Color</button>
+                <button id="randomColor" onclick = "changeColor(randomColor());">Random Color</button>
             </div>
             <div class="board">
                 
             </div>
         </div>
+        <footer>
+            <a href="https://github.com/rat00lis" class="contactMe">
+                <p class="me">
+                    Made by rat00lis
+                </p>
+            </a>
+        </footer>
     </body>
     <script src = "script.js">
         //codigo en script.js
