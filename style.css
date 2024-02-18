@@ -29,6 +29,10 @@ body{
                 background-color: #D1D648;
                 color: #212738;
             }
+            #toggleGrid.gridEnabled{
+                background-color: #D1D648;
+                color: #212738;
+            }
 
         .board{
             width: 800px;

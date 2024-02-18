@@ -75,6 +75,22 @@ function changeColor(newColor = prompt('Select Color')){
 function randomColor(){
     return '#' + Math.floor(Math.random()*16777215).toString(16);
 }
+function toggleGrid(){
+    let enableButton = document.querySelector('#toggleGrid');
+    if(enableButton.classList.contains('gridEnabled')){
+        let blocks = document.querySelectorAll('.block');
+        blocks.forEach(block => {
+            block.style.border = 'none';
+        });
+    }else{
+        let blocks = document.querySelectorAll('.block');
+        blocks.forEach(block => {
+            block.style.border = '1px solid black';
+        });
+    }
+    enableButton.classList.toggle('gridEnabled');
+    enableButton.textContent = enableButton.textContent == 'Enable Grid' ? 'Disable Grid' : 'Enable Grid';
+}
 
 
 function main(){
