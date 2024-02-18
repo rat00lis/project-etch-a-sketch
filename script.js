@@ -1,5 +1,6 @@
 let color = 'black';
-
+let board = document.querySelector(".board");
+let ammountBlocks = 10;
 function addPaintListeners(color){
     blocks = document.querySelectorAll(".block");
 
@@ -10,7 +11,10 @@ function addPaintListeners(color){
         });
     });
 }
-
+function readjustColor(color){
+    colorSelected = document.querySelector(".colorSelected");
+    colorSelected.style.backgroundColor = color;
+}
 function resizeBoard(board, ammountBlocks) {
     ammountBlocks = ((ammountBlocks > 0) && (ammountBlocks <= 100)) ? ammountBlocks : 10;
     board.innerHTML = '';
@@ -34,16 +38,26 @@ function paintBlock(block, color){
     block.style.backgroundColor = color;
 }
 
-board = document.querySelector(".board");
-resizeBoard(board, 10);
-
-resizeButton = document.querySelector("#resizeButton");
-resizeButton.addEventListener("click", () => {
-    
+function resize(){
     ammountBlocks = prompt("select size (max 100)");
-    // first we clear the div
-    resizeBoard(board,ammountBlocks);
-});
+        // first we clear the div
+        resizeBoard(board,ammountBlocks);
+}
 
-addPaintListeners(color);
+function resetBoard(){
+    resizeBoard(board, ammountBlocks)
+}
+
+function changeColor(newColor = prompt('Select Color')){
+    color = newColor;
+    readjustColor(newColor);
+    addPaintListeners(color);
+}
+
+function main(){
+    resizeBoard(board, ammountBlocks);
+    readjustColor(color);
+    addPaintListeners(color);
+}
+
 
